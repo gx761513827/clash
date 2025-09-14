@@ -324,4 +324,4 @@ rules:
   - "RULE-SET,geolocation-!cn,🚀 默认代理"
   - "RULE-SET,cn_domain,🎯 全球直连"
   - "RULE-SET,cn_ip,🎯 全球直连"
-  - "ATCH,🐟 漏网之鱼"
+  - "MATCH,🐟 漏网之鱼"
