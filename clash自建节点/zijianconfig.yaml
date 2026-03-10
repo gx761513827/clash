@@ -4,7 +4,7 @@
 # 机场订阅
 proxy-providers:
   Airport1:
-    url: "https://sub.mt103106.de/2xVyxdLxog1Wp01M9huD/download/US?target=ClashMeta"
+    url: "订阅链接"
     type: http
     interval: 86400
     health-check:
