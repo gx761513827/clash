@@ -206,13 +206,6 @@ rule-providers:
     interval: 86400
     format: mrs
     type: http
-  proxylite:
-    url: https://raw.githubusercontent.com/qichiyuhub/rule/refs/heads/main/proxy.list
-    path: ./ruleset/proxy.list
-    behavior: classical
-    interval: 86400
-    format: text
-    type: http
   ai:
     url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/category-ai-!cn.mrs
     path: ./ruleset/category-ai-!cn.mrs
@@ -366,7 +359,6 @@ rules:
   - "RULE-SET,private_ip,🎯 全球直连"
   - "RULE-SET,private_domain,🎯 全球直连"
   - "DOMAIN-SUFFIX,qichiyu.com,🚀 默认代理"
-  - "RULE-SET,proxylite,🚀 默认代理"
   - "RULE-SET,blog_domain,🚀 默认代理"
   - "RULE-SET,PT_domain,📀 PT"
   - "RULE-SET,ai,🤖 ChatGPT"
