@@ -1,4 +1,23 @@
+# =========================================================
+# 自定义节点
+# =========================================================
+
+proxies:
+  - name: home-ss
+    type: ss
+    server: YOUR_HOME_SS_SERVER
+    port: YOUR_HOME_SS_PORT
+    cipher: YOUR_SS_CIPHER
+    password: "YOUR_HOME_SS_PASSWORD"
+    udp: true
+
+
+# =========================================================
+# Proxy Groups
+# =========================================================
+
 proxy-groups:
+
   - name: 🚀 默认代理
     type: select
     proxies:
@@ -11,19 +30,35 @@ proxy-groups:
       - 🇺🇲 美国节点
       - 🇰🇷 韩国节点
       - DIRECT
+
   - name: ♻️ 自动选择
     type: url-test
     include-all: true
+    exclude-filter: (?i)^home-ss$
     interval: 300
     tolerance: 50
+
   - name: 📀 PT
     type: select
     proxies:
       - 🚀 默认代理
       - DIRECT
+
   - name: 🚀 手动切换
     include-all: true
+    exclude-filter: (?i)^home-ss$
     type: select
+
+  # =======================================================
+  # ★ 回家专用
+  # =======================================================
+
+  - name: 🏠 回家
+    type: select
+    proxies:
+      - home-ss
+      - DIRECT
+
   - name: 📲 Telegram
     type: select
     proxies:
@@ -37,6 +72,7 @@ proxy-groups:
       - 🇺🇲 美国节点
       - 🇰🇷 韩国节点
       - DIRECT
+
   - name: 🤖 ChatGPT
     type: select
     proxies:
@@ -50,6 +86,7 @@ proxy-groups:
       - 🇺🇲 美国节点
       - 🇰🇷 韩国节点
       - DIRECT
+
   - name: 📹 YouTube
     type: select
     proxies:
@@ -63,6 +100,7 @@ proxy-groups:
       - 🇺🇲 美国节点
       - 🇰🇷 韩国节点
       - DIRECT
+
   - name: 🎥 奈飞视频
     type: select
     proxies:
@@ -76,6 +114,7 @@ proxy-groups:
       - 🇺🇲 美国节点
       - 🇰🇷 韩国节点
       - DIRECT
+
   - name: 🎵 TikTok
     type: select
     proxies:
@@ -89,6 +128,7 @@ proxy-groups:
       - 🇺🇲 美国节点
       - 🇰🇷 韩国节点
       - DIRECT
+
   - name: 🍀 Google
     type: select
     proxies:
@@ -102,6 +142,7 @@ proxy-groups:
       - 🇺🇲 美国节点
       - 🇰🇷 韩国节点
       - DIRECT
+
   - name: 👨🏿‍💻 GitHub
     type: select
     proxies:
@@ -115,6 +156,7 @@ proxy-groups:
       - 🇺🇲 美国节点
       - 🇰🇷 韩国节点
       - DIRECT
+
   - name: 🐬 OneDrive
     type: select
     proxies:
@@ -128,6 +170,7 @@ proxy-groups:
       - 🇺🇲 美国节点
       - 🇰🇷 韩国节点
       - DIRECT
+
   - name: 🪟 Microsoft
     type: select
     proxies:
@@ -141,12 +184,14 @@ proxy-groups:
       - 🇺🇲 美国节点
       - 🇰🇷 韩国节点
       - DIRECT
+
   - name: 🎯 全球直连
     type: select
     proxies:
       - DIRECT
       - 🚀 默认代理
       - ♻️ 自动选择
+
   - name: 🐟 漏网之鱼
     type: select
     proxies:
@@ -160,36 +205,46 @@ proxy-groups:
       - 🇺🇲 美国节点
       - 🇰🇷 韩国节点
       - DIRECT
+
+  # =======================================================
+  # 地区节点
+  # =======================================================
+
   - name: 🇭🇰 香港节点
     include-all: true
     filter: (?i)港|HK|hk|Hong Kong|HongKong|hongkong
     type: url-test
     interval: 300
     tolerance: 50
+
   - name: 🇯🇵 日本节点
     include-all: true
     filter: (?i)日本|川日|东京|大阪|泉日|埼玉|沪日|深日|JP|Japan
     type: url-test
     interval: 300
     tolerance: 50
+
   - name: 🇺🇲 美国节点
     include-all: true
     filter: (?i)美|波特兰|达拉斯|俄勒冈|凤凰城|费利蒙|硅谷|拉斯维加斯|洛杉矶|圣何塞|圣克拉拉|西雅图|芝加哥|US|United States
     type: url-test
     interval: 300
     tolerance: 50
+
   - name: 🇨🇳 台湾节点
     include-all: true
     filter: (?i)台|新北|彰化|TW|Taiwan
     type: url-test
     interval: 300
     tolerance: 50
+
   - name: 🇸🇬 狮城节点
     include-all: true
     filter: (?i)新加坡|坡|狮城|SG|Singapore
     type: url-test
     interval: 300
     tolerance: 50
+
   - name: 🇰🇷 韩国节点
     include-all: true
     filter: (?i)KR|Korea|KOR|首尔|韩|韓
@@ -198,7 +253,12 @@ proxy-groups:
     tolerance: 50
 
 
+# =========================================================
+# Rule Providers
+# =========================================================
+
 rule-providers:
+
   private_domain:
     url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/private.mrs
     path: ./ruleset/private.mrs
@@ -206,6 +266,7 @@ rule-providers:
     interval: 86400
     format: mrs
     type: http
+
   ai:
     url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/category-ai-!cn.mrs
     path: ./ruleset/category-ai-!cn.mrs
@@ -213,6 +274,7 @@ rule-providers:
     interval: 86400
     format: mrs
     type: http
+
   blog_domain:
     url: https://github.com/gx761513827/clash/raw/refs/heads/main/clash%E8%A7%84%E5%88%99/blog.mrs
     path: ./ruleset/blog.mrs
@@ -220,6 +282,7 @@ rule-providers:
     interval: 86400
     format: mrs
     type: http
+
   PT_domain:
     url: https://github.com/gx761513827/clash/raw/refs/heads/main/clash%E8%A7%84%E5%88%99/pt.mrs
     path: ./ruleset/pt.mrs
@@ -227,6 +290,7 @@ rule-providers:
     interval: 86400
     format: mrs
     type: http
+
   youtube_domain:
     url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/youtube.mrs
     path: ./ruleset/youtube.mrs
@@ -234,6 +298,7 @@ rule-providers:
     interval: 86400
     format: mrs
     type: http
+
   NETFLIX_domain:
     url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/netflix.mrs
     path: ./ruleset/netflix.mrs
@@ -241,6 +306,7 @@ rule-providers:
     interval: 86400
     format: mrs
     type: http
+
   google_domain:
     url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/google.mrs
     path: ./ruleset/google.mrs
@@ -248,6 +314,7 @@ rule-providers:
     interval: 86400
     format: mrs
     type: http
+
   github_domain:
     url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/github.mrs
     path: ./ruleset/github.mrs
@@ -255,6 +322,7 @@ rule-providers:
     interval: 86400
     format: mrs
     type: http
+
   telegram_domain:
     url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/telegram.mrs
     path: ./ruleset/telegram.mrs
@@ -262,6 +330,7 @@ rule-providers:
     interval: 86400
     format: mrs
     type: http
+
   onedrive_domain:
     url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/onedrive.mrs
     path: ./ruleset/onedrive.mrs
@@ -269,6 +338,7 @@ rule-providers:
     interval: 86400
     format: mrs
     type: http
+
   microsoft_domain:
     url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/microsoft.mrs
     path: ./ruleset/microsoft.mrs
@@ -276,6 +346,7 @@ rule-providers:
     interval: 86400
     format: mrs
     type: http
+
   apple_domain:
     url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/apple-cn.mrs
     path: ./ruleset/apple-cn.mrs
@@ -283,6 +354,7 @@ rule-providers:
     interval: 86400
     format: mrs
     type: http
+
   tiktok_domain:
     url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/tiktok.mrs
     path: ./ruleset/tiktok.mrs
@@ -290,6 +362,7 @@ rule-providers:
     interval: 86400
     format: mrs
     type: http
+
   speedtest_domain:
     url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/ookla-speedtest.mrs
     path: ./ruleset/ookla-speedtest.mrs
@@ -297,6 +370,7 @@ rule-providers:
     interval: 86400
     format: mrs
     type: http
+
   geolocation-!cn:
     url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/geolocation-!cn.mrs
     path: ./ruleset/geolocation-!cn.mrs
@@ -304,6 +378,7 @@ rule-providers:
     interval: 86400
     format: mrs
     type: http
+
   cn_domain:
     url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/cn.mrs
     path: ./ruleset/cn.mrs
@@ -319,6 +394,7 @@ rule-providers:
     interval: 86400
     format: mrs
     type: http
+
   cn_ip:
     url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/cn.mrs
     path: ./ruleset/cn_ip.mrs
@@ -326,6 +402,7 @@ rule-providers:
     interval: 86400
     format: mrs
     type: http
+
   google_ip:
     url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/google.mrs
     path: ./ruleset/google_ip.mrs
@@ -333,6 +410,7 @@ rule-providers:
     interval: 86400
     format: mrs
     type: http
+
   telegram_ip:
     url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/telegram.mrs
     path: ./ruleset/telegram_ip.mrs
@@ -340,6 +418,7 @@ rule-providers:
     interval: 86400
     format: mrs
     type: http
+
   netflix_ip:
     url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/netflix.mrs
     path: ./ruleset/netflix_ip.mrs
@@ -347,6 +426,7 @@ rule-providers:
     interval: 86400
     format: mrs
     type: http
+
   apple_ip:
     url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo-lite/geoip/apple.mrs
     path: ./ruleset/apple_ip.mrs
@@ -355,28 +435,129 @@ rule-providers:
     format: mrs
     type: http
 
+
+# =========================================================
+# Rules
+# =========================================================
+
 rules:
+
+  # =======================================================
+  # ★ 回家网络
+  # 必须放在 private_ip 前面
+  # =======================================================
+
+  - "IP-CIDR,192.168.50.0/24,🏠 回家,no-resolve"
+
+  # =======================================================
+  # 私有网络
+  # =======================================================
+
   - "RULE-SET,private_ip,🎯 全球直连"
   - "RULE-SET,private_domain,🎯 全球直连"
+
+  # =======================================================
+  # 自定义域名
+  # =======================================================
+
   - "DOMAIN-SUFFIX,qichiyu.com,🚀 默认代理"
+
+  # =======================================================
+  # Blog
+  # =======================================================
+
   - "RULE-SET,blog_domain,🚀 默认代理"
+
+  # =======================================================
+  # PT
+  # =======================================================
+
   - "RULE-SET,PT_domain,📀 PT"
+
+  # =======================================================
+  # AI
+  # =======================================================
+
   - "RULE-SET,ai,🤖 ChatGPT"
+
+  # =======================================================
+  # GitHub
+  # =======================================================
+
   - "RULE-SET,github_domain,👨🏿‍💻 GitHub"
+
+  # =======================================================
+  # YouTube
+  # =======================================================
+
   - "RULE-SET,youtube_domain,📹 YouTube"
+
+  # =======================================================
+  # Netflix
+  # =======================================================
+
   - "RULE-SET,NETFLIX_domain,🎥 奈飞视频"
+
+  # =======================================================
+  # Google
+  # =======================================================
+
   - "RULE-SET,google_domain,🍀 Google"
+
+  # =======================================================
+  # OneDrive
+  # =======================================================
+
   - "RULE-SET,onedrive_domain,🐬 OneDrive"
+
+  # =======================================================
+  # Microsoft
+  # =======================================================
+
   - "RULE-SET,microsoft_domain,🪟 Microsoft"
+
+  # =======================================================
+  # TikTok
+  # =======================================================
+
   - "RULE-SET,tiktok_domain,🎵 TikTok"
+
+  # =======================================================
+  # Apple
+  # =======================================================
+
   - "RULE-SET,apple_domain,🎯 全球直连"
+
+  # =======================================================
+  # Telegram
+  # =======================================================
+
   - "RULE-SET,telegram_domain,📲 Telegram"
+
+  # =======================================================
+  # IP Rules
+  # =======================================================
+
   - "RULE-SET,apple_ip,🎯 全球直连"
   - "RULE-SET,google_ip,🍀 Google"
-
   - "RULE-SET,telegram_ip,📲 Telegram"
   - "RULE-SET,netflix_ip,🎥 奈飞视频"
+
+  # =======================================================
+  # 非中国
+  # =======================================================
+
   - "RULE-SET,geolocation-!cn,🚀 默认代理"
+
+  # =======================================================
+  # 中国
+  # =======================================================
+
   - "RULE-SET,cn_domain,🎯 全球直连"
   - "RULE-SET,cn_ip,🎯 全球直连"
+
+  # =======================================================
+  # 最终规则
+  # =======================================================
+
   - "MATCH,🐟 漏网之鱼"
