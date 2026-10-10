@@ -29,17 +29,17 @@ rule-anchor:
 proxies:
   - name: USA
     type: vless
-    server: "blog.mt103106.de"
+    server: "**"
     port: 443
     udp: true
-    uuid: "c50ab3c3-c7d4-4f9f-97d8-32bee8887b11"
+    uuid: "**"
     flow: xtls-rprx-vision
     packet-encoding: xudp
     tls: true
-    servername: "blog.mt103106.de"
+    servername: "**"
     client-fingerprint: chrome
     reality-opts:
-      public-key: "ZWH5O3VaGVs6F-i0ft2Fkvy9fUZSvQDoMwv6BYHI0V4"
+      public-key: "**"
       short-id: "abcd1234"
     skip-cert-verify: false
   - {name: 直连, type: direct, udp: true}
